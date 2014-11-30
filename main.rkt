@@ -7,8 +7,10 @@
          after
          enqueue
          dequeue
+         apply-queue
          purge-queue
          shutdown-queue
+         wait-queue
          inspect-queue
          today-at
          tomorrow-at)
@@ -39,7 +41,10 @@
   (thread-send (queue-manager) `(remove ,t) #f))
 
 (define (inspect-queue)
-  (thread-send (queue-manager) `(inspect ,(lambda (items) (displayln items)))))
+  (apply-queue (lambda (items) (displayln items))))
+
+(define (apply-queue fn)
+  (thread-send (queue-manager) `(inspect ,fn)))
 
 (define (purge-queue)
   (thread-send (queue-manager) 'purge #f))
@@ -47,12 +52,26 @@
 (define (shutdown-queue)
   (thread-send (queue-manager) 'shutdown #f))
 
+(define (wait-queue)
+  (let ([finished (make-semaphore)])
+    (apply-queue (lambda (queue)
+                   (for ([t (in-set queue)])
+                     (thread-wait t))
+                   (semaphore-post finished)))
+    (semaphore-wait finished)))
+
 (define (defer fn #:eta [eta-date (current-date)])
-  (thread (lambda ()
-            (when (enqueue (current-thread))
-              (sync (alarm-evt (* 1000 (date->seconds eta-date))))
-              (dequeue (current-thread))
-              (fn)))))
+  (let ([queue-wait (make-semaphore)])
+    (thread (lambda ()
+              (let ([queue-response (enqueue (current-thread))])
+                (semaphore-post queue-wait)
+                (when queue-response
+                  (sync (alarm-evt (* 1000 (date->seconds eta-date))))
+                  (dequeue (current-thread))
+                  (fn))
+
+              )))
+    (semaphore-wait queue-wait)))
 
 
 (define (eta-from-offset #:seconds [sec 0] #:minutes [minutes 0] #:hours [hours 0] #:days [days 0])
