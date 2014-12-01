@@ -46,6 +46,16 @@
 (define (apply-queue fn)
   (thread-send (queue-manager) `(inspect ,fn)))
 
+(define (apply-queue/promise fn)
+  (let* ([result '()]
+         [sem (make-semaphore)]
+         [result-fn (lambda (queue)
+                      (set! result (fn queue))
+                      (semaphore-post sem))])
+    (delay (apply-queue promise-fn)
+           (semaphore-wait sem)
+           result)))
+
 (define (purge-queue)
   (thread-send (queue-manager) 'purge #f))
 
