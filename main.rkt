@@ -8,6 +8,7 @@
          enqueue
          dequeue
          apply-queue
+         apply-queue/promise
          purge-queue
          shutdown-queue
          wait-queue
@@ -52,7 +53,7 @@
          [result-fn (lambda (queue)
                       (set! result (fn queue))
                       (semaphore-post sem))])
-    (delay (apply-queue promise-fn)
+    (delay (apply-queue result-fn)
            (semaphore-wait sem)
            result)))
 
