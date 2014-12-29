@@ -4,19 +4,19 @@
 
 Print "Hello, world!" at 8:00 am today:
 ```racket
-(today-at 8 0 do
+(today-at 8 0
           (displayln "Hello, world!"))
 ```
 
 Do the same at 8:00 am tomorrow:
 ```racket
-(tomorrow-at 8 0 do
+(tomorrow-at 8 0
              (displayln "Hello, world of tomorrow!"))
 ```
 
 Print "Hello, world!" after 3 hours:
 ```racket
-(after 3 #:hours do
+(after 3 #:hours
        (displayln "Hello, world!"))
 ```
 

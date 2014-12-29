@@ -12,21 +12,21 @@
 (test-case
  "Defer works with delay via after"
  (let ([success #f])
-   (m:after 1 #:seconds do (set! success #t))
+   (m:after 1 #:seconds (set! success #t))
    (m:wait-queue)
    (check-true success)))
 
 (test-case
  "Deferred task isn't run before the specified time"
  (let ([success #f])
-   (m:after 100 #:hours do (set! success #t))
+   (m:after 100 #:hours (set! success #t))
    (check-false success)
    ;; remove the task from the queue
    (m:purge-queue)))
 
 (test-case
  "Purging results in an empty queue"
- (m:after 100 #:hours do (displayln "Hello, world!"))
+ (m:after 100 #:hours (displayln "Hello, world!"))
  (let ([queue-length '()]
        [sem (make-semaphore)])
    (m:apply-queue (lambda (queue)
