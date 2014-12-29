@@ -14,7 +14,10 @@
          wait-queue
          inspect-queue
          today-at
-         tomorrow-at)
+         tomorrow-at
+         queue-manager
+         queue-manager-loop
+         purge)
 
 (define (purge items)
   (for ([t (in-set items)])

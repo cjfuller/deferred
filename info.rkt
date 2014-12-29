@@ -9,3 +9,4 @@
 (define primary-file "main.rkt")
 (define homepage "https://github.com/cjfuller/deferred")
 (define version "0.1")
+(define scribblings '(("deferred.scrbl" ())))
