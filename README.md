@@ -1,6 +1,6 @@
-# Deferred: a simple time-deferred task library for racket.
+### Deferred: a simple library for doing things later
 
-## Examples:
+#### Quick examples:
 
 Print "Hello, world!" at 8:00 am today:
 ```racket
