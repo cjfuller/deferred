@@ -1,6 +1,6 @@
-### Deferred: a simple library for doing things later
+## Deferred: a simple library for doing things later
 
-#### Quick examples:
+### Quick examples:
 
 Print "Hello, world!" at 8:00 am today:
 ```racket
