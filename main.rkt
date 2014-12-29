@@ -99,21 +99,21 @@
                (second 0)))
 
 (define-syntax (after stx)
-  (syntax-case stx (do)
-    [(after num kw do body ...)
+  (syntax-case stx ()
+    [(after num kw body ...)
      #'(let ([eta (eta-from-offset kw num)])
          (defer (lambda () body ...) #:eta eta))]))
 
 (define-syntax (tomorrow-at stx)
-  (syntax-case stx (do)
-    [(tomorrow-at hr mins do body ...)
+  (syntax-case stx ()
+    [(tomorrow-at hr mins body ...)
      #'(let ([base-time (eta-from-offset #:hours 24)])
          (defer (lambda () body ...)
            #:eta (set-from-base base-time hr mins)))]))
 
 (define-syntax (today-at stx)
-  (syntax-case stx (do)
-    [(today-at hr mins do body ...)
+  (syntax-case stx ()
+    [(today-at hr mins body ...)
      #'(defer (lambda () body ...)
          #:eta (set-from-base (current-date) hr mins))]))
 
