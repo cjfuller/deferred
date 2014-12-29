@@ -26,7 +26,7 @@ function to a taskqueue, with various levels of convenience.
 
 For running a function at a specified @racket[date], use @racket[defer]:
 
-@defproc[(defer [fn (-> () any)] [#:eta date date? (current-date)])
+@defproc[(defer [fn (-> any)] [#:eta date date? (current-date)])
          void?]{
 
  Runs the provided function at a later date (defaulting to now). Providing a
