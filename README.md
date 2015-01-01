@@ -1,5 +1,9 @@
 ## Deferred: a simple library for doing things later
 
+### Documentation
+
+See [http://pkg-build.racket-lang.org/doc/deferred/index.html]
+
 ### Quick examples:
 
 Print "Hello, world!" at 8:00 am today:
