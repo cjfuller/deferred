@@ -8,5 +8,9 @@
     "or after a specified delay."))
 (define primary-file "main.rkt")
 (define homepage "https://github.com/cjfuller/deferred")
-(define version "0.1.1")
+(define version "0.1.2")
 (define scribblings '(("deferred.scrbl" ())))
+(define deps '("base"
+               ; TODO: is there a way to declare a test-only dependency?
+               "rackunit-lib"))
+(define build-deps '("scribble-lib"))
