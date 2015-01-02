@@ -2,7 +2,7 @@
 
 ### Documentation
 
-See [http://pkg-build.racket-lang.org/doc/deferred/index.html]
+See http://pkg-build.racket-lang.org/doc/deferred/index.html
 
 ### Quick examples:
 
