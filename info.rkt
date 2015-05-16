@@ -13,4 +13,5 @@
 (define deps '("base"
                ; TODO: is there a way to declare a test-only dependency?
                "rackunit-lib"))
-(define build-deps '("scribble-lib"))
+(define build-deps '("racket-doc"
+                     "scribble-lib"))
